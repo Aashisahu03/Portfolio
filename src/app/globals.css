@@ -1,0 +1,179 @@
+/* Import Tailwind styles (v4 way) */
+@import "tailwindcss/preflight";
+/* Replaces @tailwind base */
+@import "tailwindcss/utilities";
+/* Includes all utilities */
+
+/* Custom properties (CSS variables) */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Inline theming */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Global body styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #0a0a0a;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-links a:hover {
+  color: #00bcd4;
+  transition: color 0.3s ease;
+}
+
+@font-face {
+  font-family: 'Felix Titling';
+  src: url('/fonts/FelixTitling.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@keyframes border-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-spin {
+  animation: border-spin 2s linear infinite;
+  transform-origin: center;
+  pointer-events: none;
+  border-radius: 0.5rem;
+}
+
+@keyframes gradient-spin {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-gradient-spin {
+  animation: gradient-spin 4s linear infinite;
+}
+
+.highlight-text {
+  position: relative;
+  z-index: 1;
+}
+
+
+.highlight-text::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110%;
+  height: 1.2em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+  clip-path: inset(0 100% 0 0);
+  /* Hidden by default */
+  transition: clip-path 1s ease;
+  /* Smooth reveal */
+}
+
+.highlight-1::before {
+  background-image: url('/pink.png');
+}
+
+.highlight-2::before {
+  background-image: url('/blue.png');
+}
+
+.highlight-3::before {
+  background-image: url('/orange.png');
+}
+
+.highlight-text.active::before {
+  clip-path: inset(0 0 0 0);
+  /* Fully visible */
+}
+
+@keyframes spinGlow {
+  0% {
+    transform: rotate(0deg);
+    filter: drop-shadow(0 0 5px #00b4ff);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px #00b4ff);
+  }
+
+  100% {
+    transform: rotate(360deg);
+    filter: drop-shadow(0 0 5px #00b4ff);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 400% 400%;
+  animation: gradient 12s ease infinite;
+}
