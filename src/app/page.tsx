@@ -2,58 +2,27 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState, useRef } from 'react';
-import { FadeInLine } from '~/lib/components/FadeInLine'; // adjust the path as needed
+import { FadeInLine } from '~/lib/components/FadeInLine';
 import './globals.css'
 
+const HeroSection = dynamic(() => import('~/lib/components/HeroSection'), { ssr: false });
+const Software = dynamic(() => import('~/lib/components/software'), { ssr: false });
+const PreviousActivities = dynamic(() => import('~/lib/components/Projects'), { ssr: false });
+const Contact = dynamic(() => import('~/lib/components/Contacts'), { ssr: false });
 
-const HeroSection = dynamic(() => import('~/lib/components/HeroSection'), {
-  ssr: false,
-  loading: () => (
-    <div className="h-screen w-screen bg-black text-white flex justify-center items-center">
-      Loading...
-    </div>
-  ),
-});
-
-const Software = dynamic(() => import('~/lib/components/software'), {
-  ssr: false,
-  loading: () => (
-    <div className="min-h-screen bg-[#222] text-white flex justify-center items-center">
-      Loading Software
-    </div>
-  ),
-});
-
-const PreviousActivities = dynamic(() => import('~/lib/components/Projects'), {
-  ssr: false,
-  loading: () => (
-    <div className="min-h-screen bg-[#222] text-white flex justify-center items-center">
-      Loading Projects
-    </div>
-  ),
-});
-const Contact = dynamic(() => import('~/lib/components/Contacts'), {
-  ssr: false,
-  loading: () => (
-    <div className="h-screen w-screen bg-black text-white flex justify-center items-center">
-      Loading Contact...
-    </div>
-  ),
-});
 export default function HomePage() {
   const [showGlassmorphic, setShowGlassmorphic] = useState(true);
   const [showPortSection, setShowPortSection] = useState(false);
-  const contactRef = useRef<HTMLDivElement>(null);
-  const [fadeValue, setFadeValue] = useState(0.4); // starts dull
+  const contactRef = useRef<HTMLDivElement | null>(null); // ✅ allow null
+  const [fadeValue, setFadeValue] = useState(0.4);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const maxScroll = 500; // adjust how quickly it fades in
-      const newFade = Math.min(1, 0.4 + scrollTop / maxScroll); // fade from 0.4 to 1
+      const maxScroll = 500;
+      const newFade = Math.min(1, 0.4 + scrollTop / maxScroll);
       setFadeValue(newFade);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -64,10 +33,8 @@ export default function HomePage() {
       setShowGlassmorphic(scrollY < window.innerHeight);
       setShowPortSection(scrollY >= window.innerHeight * 0.1);
     };
-
     window.addEventListener('scroll', onScroll);
     onScroll();
-
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   useEffect(() => {
@@ -107,7 +74,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden">
       <section className="relative h-screen w-full">
-        <HeroSection showGlassmorphic={showGlassmorphic} contactRef={contactRef} />
+        <HeroSection showGlassmorphic={showGlassmorphic} contactRef={contactRef} /> {/* ✅ matches */}
       </section>
 
       <section className="relative h-screen w-full overflow-hidden">
@@ -215,10 +182,7 @@ export default function HomePage() {
         className="min-h-screen w-full bg-[#111] text-white transition-all duration-1000 ease-in-out">
         <PreviousActivities />
       </section>
-      <section
-        ref={contactRef}
-        style={{ minHeight: "100vh", position: "relative", zIndex: 0 }}
-      >
+      <section ref={contactRef} style={{ minHeight: "100vh", position: "relative", zIndex: 0 }}>
         <Contact />
       </section>
     </div>
