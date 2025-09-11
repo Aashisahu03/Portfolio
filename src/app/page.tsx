@@ -13,7 +13,7 @@ const Contact = dynamic(() => import('~/lib/components/Contacts'), { ssr: false 
 export default function HomePage() {
   const [showGlassmorphic, setShowGlassmorphic] = useState(true);
   const [showPortSection, setShowPortSection] = useState(false);
-  const contactRef = useRef<HTMLDivElement>(null!);
+  const contactRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const [fadeValue, setFadeValue] = useState(0.4);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden">
       <section className="relative h-screen w-full">
-        <HeroSection showGlassmorphic={showGlassmorphic} contactRef={contactRef} /> {/* ✅ matches */}
+        <HeroSection showGlassmorphic contactRef={contactRef} />{/* ✅ matches */}
       </section>
 
       <section className="relative h-screen w-full overflow-hidden">
