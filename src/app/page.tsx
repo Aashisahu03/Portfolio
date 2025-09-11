@@ -74,7 +74,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden">
       <section className="relative h-screen w-full">
-        <HeroSection showGlassmorphic contactRef={contactRef} />{/* ✅ matches */}
+        <HeroSection showGlassmorphic={showGlassmorphic} contactRef={contactRef} />{/* ✅ matches */}
       </section>
 
       <section className="relative h-screen w-full overflow-hidden">
