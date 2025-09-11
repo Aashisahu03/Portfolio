@@ -3,10 +3,11 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
-type HeroSectionProps = {
-    showGlassmorphic?: boolean;
-    contactRef?: React.RefObject<HTMLDivElement>;
-};
+interface HeroSectionProps {
+    showGlassmorphic: boolean;
+    contactRef: React.RefObject<HTMLDivElement | null>;
+}
+
 
 export default function HeroSection({ showGlassmorphic = true, contactRef }: HeroSectionProps) {
     const [scale, setScale] = useState(1);
