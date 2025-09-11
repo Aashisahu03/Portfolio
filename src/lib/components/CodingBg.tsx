@@ -44,6 +44,8 @@ const CodingBackground: React.FC = () => {
         }
 
         function animate() {
+            if (!ctx || !canvas) return;
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             particles.forEach((p) => {
