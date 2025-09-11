@@ -13,7 +13,7 @@ const Contact = dynamic(() => import('~/lib/components/Contacts'), { ssr: false 
 export default function HomePage() {
   const [showGlassmorphic, setShowGlassmorphic] = useState(true);
   const [showPortSection, setShowPortSection] = useState(false);
-  const contactRef = useRef<HTMLDivElement | null>(null); // ✅ allow null
+  const contactRef = useRef<HTMLDivElement>(null!);
   const [fadeValue, setFadeValue] = useState(0.4);
 
   useEffect(() => {

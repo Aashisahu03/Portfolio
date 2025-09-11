@@ -5,8 +5,9 @@ import { Typewriter } from 'react-simple-typewriter';
 
 interface HeroSectionProps {
     showGlassmorphic: boolean;
-    contactRef: React.RefObject<HTMLDivElement | null>; // ✅ allow null
+    contactRef: React.RefObject<HTMLDivElement>;
 }
+
 
 export default function HeroSection({ showGlassmorphic = true, contactRef }: HeroSectionProps) {
     const [scale, setScale] = useState(1);
