@@ -1,21 +1,22 @@
-// HeroSection.tsx
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
-type HeroSectionProps = {
-    showGlassmorphic?: boolean;
-    contactRef?: React.RefObject<HTMLDivElement>;
-};
+
+interface HeroSectionProps {
+    showGlassmorphic: boolean;
+    contactRef: React.RefObject<HTMLDivElement | null>; // ✅ allow null
+}
 
 export default function HeroSection({ showGlassmorphic = true, contactRef }: HeroSectionProps) {
     const [scale, setScale] = useState(1);
     const [section, setSection] = useState(0);
     const backgroundRef = useRef<HTMLDivElement>(null);
+
     const wrapperStyle: React.CSSProperties = {
         position: "relative",
         display: "inline-block",
-        padding: "3px", // border thickness
+        padding: "3px",
         borderRadius: "12px",
         overflow: "hidden",
         cursor: 'pointer',
@@ -27,10 +28,9 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
         borderRadius: "12px",
         background: "conic-gradient(yellow 0deg, transparent 90deg, transparent 270deg, yellow 360deg)",
         animation: "spin 2s linear infinite",
-        WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-        WebkitMaskComposite: "xor", // for Chrome/Safari
-        maskComposite: "exclude",   // for Firefox
+        WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+        WebkitMaskComposite: "xor",
+        maskComposite: "exclude",
         padding: "3px",
         boxSizing: "border-box",
     };
@@ -44,10 +44,10 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
         zIndex: 1,
         display: "inline-block",
     };
+
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
-
             const zoom = Math.max(0.5, 1 - scrollY / 1000);
             setScale(zoom);
 
@@ -107,10 +107,7 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
                             return (
                                 <div
                                     style={wrapperStyle}
-                                    onClick={() => {
-                                        // Example: scroll to your contact section
-                                        contactRef?.current?.scrollIntoView({ behavior: "smooth" });
-                                    }}
+                                    onClick={() => contactRef.current?.scrollIntoView({ behavior: "smooth" })}
                                     role="button"
                                     tabIndex={0}
                                     onKeyDown={(e) => {
@@ -122,16 +119,13 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
                                     <div style={borderLayerStyle}></div>
                                     <span style={innerStyle}>Contact me</span>
 
-                                    <style>
-                                        {`
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    `}
-                                    </style>
+                                    <style>{`
+                    @keyframes spin {
+                      0% { transform: rotate(0deg); }
+                      100% { transform: rotate(360deg); }
+                    }
+                  `}</style>
                                 </div>
-
                             );
                         default:
                             return null;
@@ -156,7 +150,6 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
                 />
             </div>
 
-            {/* Show glassmorphic box only if prop is true */}
             {showGlassmorphic && (
                 <div className="fixed top-0 left-0 h-screen w-screen z-10 pointer-events-none">
                     <div className="w-full h-screen flex items-center justify-center">
@@ -174,7 +167,6 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
                     </div>
                 </div>
             )}
-
         </div>
     );
 }
