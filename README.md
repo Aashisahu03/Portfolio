@@ -1,4 +1,4 @@
-# Aashish Sahu — Portfolio
+# Aashi Sahu — Portfolio
 
 A personal portfolio built with [Next.js](https://nextjs.org), showcasing software projects including [ChromaCanvas](https://chromacanvas.vercel.app/) and [QueryMind](https://querymind-production-b6a4.up.railway.app/).
 
