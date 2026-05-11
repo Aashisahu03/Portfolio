@@ -277,7 +277,7 @@ export default function Contact() {
                             <h3 style={{ fontSize: "1.5rem", fontWeight: 700 }}>Resume</h3>
                             <p>Download my latest resume to see my experience and projects.</p>
                             <a
-                                href="https://drive.google.com/file/d/1jn10b6gQBPQD4Xbo-yV4Lig4G56U8wo_/view?usp=sharing"
+                                href="https://drive.google.com/file/d/1n_bESO7uCY15KwVvchHtCDl4vX3VCZwu/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{ textDecoration: "none" }}
