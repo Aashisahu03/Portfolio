@@ -87,8 +87,8 @@ export default function HomePage() {
         />
       </section>
 
-      <section className="min-h-screen px-12 py-24 bg-[#111] text-white flex items-center justify-start">
-        <div className="flex flex-col w-[750px] ml-[320px] mt-[150px] text-[30px] leading-relaxed mb-[150px]">
+      <section className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-16 sm:py-24 bg-[#111] text-white flex items-center justify-start">
+        <div className="flex flex-col w-full max-w-[750px] mx-auto lg:ml-[320px] mt-[60px] sm:mt-[100px] lg:mt-[150px] text-[18px] sm:text-[22px] md:text-[26px] lg:text-[30px] leading-relaxed mb-[60px] sm:mb-[100px] lg:mb-[150px]">
           <FadeInLine index={0}>Hi.</FadeInLine>
 
           <FadeInLine index={1}>
@@ -100,7 +100,7 @@ export default function HomePage() {
           </FadeInLine>
 
           <FadeInLine index={3}>
-            From creating a custom authentication microservice that <span className="highlight-text highlight-2">boosted daily engagement by 30%</span>      ,      to implementing lazy loading.
+            From creating a custom authentication microservice that <span className="highlight-text highlight-2">boosted daily engagement by 30%</span>, to implementing lazy loading.
           </FadeInLine>
 
           <FadeInLine index={4}>
@@ -115,18 +115,18 @@ export default function HomePage() {
             Do you want to take your project from concept to a production-ready system — with clear communication, robust engineering, and measurable results?
           </FadeInLine>
 
-          <FadeInLine index={7}>Then let’s talk.</FadeInLine>
+          <FadeInLine index={7}>Then let's talk.</FadeInLine>
 
           <style>{`
-    .highlight-text {
-      position: relative;
-      z-index: 1;
-    } 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  `}</style>
+      .highlight-text {
+        position: relative;
+        z-index: 1;
+      }
+      @keyframes spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `}</style>
 
           <div
             style={{
@@ -136,6 +136,8 @@ export default function HomePage() {
               padding: "4px",
               overflow: "hidden",
               cursor: "pointer",
+              alignSelf: "flex-start",
+              marginTop: "1rem",
             }}
           >
             {/* Rotating Border */}
@@ -153,7 +155,6 @@ export default function HomePage() {
                 WebkitMaskComposite: "xor",
                 maskComposite: "exclude",
                 boxSizing: "border-box",
-                width: "225px",
               }}
             />
 
@@ -164,9 +165,11 @@ export default function HomePage() {
                 background: "black",
                 color: "white",
                 borderRadius: "8px",
-                padding: "10px 32px",
+                padding: "clamp(8px, 1.5vw, 10px) clamp(16px, 4vw, 32px)",
+                fontSize: "clamp(13px, 1.8vw, 16px)",
                 zIndex: 1,
                 display: "inline-block",
+                whiteSpace: "nowrap",
               }}
             >
               Contact me

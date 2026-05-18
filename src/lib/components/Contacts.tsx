@@ -8,7 +8,7 @@ export default function Contact() {
 
     useEffect(() => {
         let current = 0;
-        const target = 40; // your working capacity in %
+        const target = 40;
         const interval = setInterval(() => {
             current += 1;
             if (current > target) clearInterval(interval);
@@ -27,7 +27,7 @@ export default function Contact() {
         padding: "3px",
         borderRadius: "12px",
         overflow: "hidden",
-        cursor: 'pointer',
+        cursor: "pointer",
     };
 
     const borderLayerStyle: React.CSSProperties = {
@@ -48,21 +48,20 @@ export default function Contact() {
         background: "black",
         color: "white",
         borderRadius: "8px",
-        padding: "10px 32px",
+        padding: "clamp(8px, 1.5vw, 10px) clamp(16px, 4vw, 32px)",
+        fontSize: "clamp(13px, 1.8vw, 16px)",
         zIndex: 1,
         display: "inline-block",
     };
 
     return (
-        <div style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden", color: "white" }}>
+        <div style={{ position: "relative", width: "100vw", minHeight: "100vh", overflow: "hidden", color: "white" }}>
 
             {/* Video Background */}
             <div style={{
                 position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
+                top: 0, left: 0,
+                width: "100%", height: "100%",
                 zIndex: -1,
                 pointerEvents: "none",
             }}>
@@ -72,6 +71,8 @@ export default function Contact() {
                     style={{ width: "100%", height: "100%", border: "none", objectFit: "cover" }}
                 />
             </div>
+
+            {/* Dark overlay */}
             <div style={{
                 position: "absolute",
                 inset: 0,
@@ -89,19 +90,17 @@ export default function Contact() {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    padding: "2rem",
-                    gap: "2rem",
-                    overflow: "hidden",
+                    padding: "clamp(1rem, 4vw, 2rem)",
+                    gap: "clamp(1rem, 3vw, 2rem)",
                 }}
             >
-                {/* Dark overlay for readability */}
-                <div style={{ position: "relative", zIndex: 1 }}>
-                    {/* Normal Glassmorphic Box */}
+                <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: "1100px" }}>
+
+                    {/* ── Top Glassmorphic Box ── */}
                     <div
                         style={{
                             width: "100%",
-                            maxWidth: "1100px",
-                            padding: "3rem",
+                            padding: "clamp(1.5rem, 4vw, 3rem)",
                             borderRadius: "24px",
                             backgroundColor: "rgba(255, 255, 255, 0.05)",
                             backdropFilter: "blur(15px)",
@@ -110,22 +109,22 @@ export default function Contact() {
                             border: "1px solid rgba(255,255,255,0.1)",
                             display: "flex",
                             flexDirection: "row",
-                            gap: "2rem",
-                            justifyContent: "flex-start",
-                            position: "relative",
-                            zIndex: 1,
-                            marginBottom: "2rem", // ← added spacing below
+                            flexWrap: "wrap",
+                            gap: "clamp(1rem, 3vw, 2rem)",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginBottom: "clamp(1rem, 3vw, 2rem)",
                         }}
                     >
-                        <div style={{ flex: 1 }}>
+                        {/* Left: Heading + description */}
+                        <div style={{ flex: "1 1 280px", minWidth: 0 }}>
                             <h2
                                 style={{
-                                    fontSize: "2rem",
+                                    fontSize: "clamp(1.4rem, 3.5vw, 2rem)",
                                     fontWeight: 700,
                                     background: "linear-gradient(to bottom right, #0a1f44 0%, #cce0ff 70%, #ffffff 100%)",
                                     WebkitBackgroundClip: "text",
                                     WebkitTextFillColor: "transparent",
-                                    position: "relative",
                                     marginBottom: "1rem",
                                 }}
                             >
@@ -137,9 +136,9 @@ export default function Contact() {
                             <p
                                 style={{
                                     color: "#e5e5e5",
-                                    marginBottom: "2rem",
                                     lineHeight: 1.6,
-                                    width: "600px",
+                                    fontSize: "clamp(0.85rem, 1.8vw, 1rem)",
+                                    maxWidth: "600px",
                                 }}
                             >
                                 I am currently working to capacity. I am also available now for smaller tasks and later for larger ones.
@@ -148,21 +147,29 @@ export default function Contact() {
                             </p>
                         </div>
 
-                        {/* Glowy Semi-Circle Meter */}
-                        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            <svg width="200" height="100" viewBox="0 0 200 100">
+                        {/* Right: Semi-circle meter */}
+                        <div style={{
+                            flex: "1 1 180px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}>
+                            <svg
+                                viewBox="0 0 200 100"
+                                style={{ width: "clamp(140px, 25vw, 200px)", height: "auto" }}
+                            >
                                 <circle cx="100" cy="100" r={radius} fill="none" stroke="#333" strokeWidth="20" />
                                 <circle
-                                    cx="100"
-                                    cy="100"
-                                    r={radius}
+                                    cx="100" cy="100" r={radius}
                                     fill="none"
                                     stroke="url(#gradient)"
                                     strokeWidth="20"
                                     strokeDasharray={circumference}
                                     strokeDashoffset={dashOffset}
                                     strokeLinecap="round"
-                                    transform="rotate(-180 100 100)" />
+                                    transform="rotate(-180 100 100)"
+                                />
                                 <defs>
                                     <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
                                         <stop offset="0%" stopColor="#2b3a6f" />
@@ -177,9 +184,7 @@ export default function Contact() {
                                     </filter>
                                 </defs>
                                 <circle
-                                    cx="100"
-                                    cy="100"
-                                    r={radius}
+                                    cx="100" cy="100" r={radius}
                                     fill="none"
                                     stroke="url(#gradient)"
                                     strokeWidth="20"
@@ -187,20 +192,21 @@ export default function Contact() {
                                     strokeDashoffset={dashOffset}
                                     strokeLinecap="round"
                                     transform="rotate(-180 100 100)"
-                                    style={{ filter: "url(#glow)" }} />
+                                    style={{ filter: "url(#glow)" }}
+                                />
                             </svg>
 
-                            <div style={{ marginTop: "1rem", color: "#fff", fontSize: "1rem" }}>
+                            <div style={{ marginTop: "0.75rem", color: "#fff", fontSize: "clamp(0.85rem, 1.8vw, 1rem)" }}>
                                 {capacity}% Free Capacity
                             </div>
                         </div>
                     </div>
-                    {/* Black Glassmorphic Box */}
+
+                    {/* ── Bottom Black Glassmorphic Box ── */}
                     <div
                         style={{
                             width: "100%",
-                            maxWidth: "1100px",
-                            padding: "3rem",
+                            padding: "clamp(1.5rem, 4vw, 3rem)",
                             borderRadius: "24px",
                             backgroundColor: "rgba(0, 0, 0, 0.4)",
                             backdropFilter: "blur(15px)",
@@ -213,19 +219,23 @@ export default function Contact() {
                             alignItems: "flex-start",
                             textAlign: "center",
                             color: "#fff",
-                            gap: "2rem",
+                            gap: "clamp(1rem, 3vw, 2rem)",
                             flexWrap: "wrap",
-                            position: "relative",
-                            zIndex: 1,
-                            marginBottom: "2rem", // ← added spacing below
-                            paddingTop: "50px"
+                            marginBottom: "clamp(1rem, 3vw, 2rem)",
                         }}
                     >
                         {/* Section 1: Email */}
-                        <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: "1rem" }}>
-                            <h3 style={{ fontSize: "1.5rem", fontWeight: 700 }}>E-mail</h3>
-                            <p>Please send me an e-mail using the contact form. I'll get back to you as soon as possible.</p>
-
+                        <div style={{
+                            flex: "1 1 200px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "1rem",
+                        }}>
+                            <h3 style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", fontWeight: 700 }}>E-mail</h3>
+                            <p style={{ fontSize: "clamp(0.8rem, 1.6vw, 1rem)", lineHeight: 1.6 }}>
+                                Please send me an e-mail using the contact form. I'll get back to you as soon as possible.
+                            </p>
                             <a
                                 style={{ textDecoration: "none" }}
                                 onClick={(e) => {
@@ -233,7 +243,6 @@ export default function Contact() {
                                     const email = "aashisahu0302@gmail.com";
                                     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
                                     const newWindow = window.open(gmailUrl, "_blank");
-
                                     if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
                                         window.location.href = `mailto:${email}`;
                                     }
@@ -246,11 +255,18 @@ export default function Contact() {
                             </a>
                         </div>
 
-
                         {/* Section 2: Social Media */}
-                        <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center" }}>
-                            <h3 style={{ fontSize: "1.5rem", fontWeight: 700 }}>Social Media</h3>
-                            <p>Follow me on the following platforms.</p>
+                        <div style={{
+                            flex: "1 1 200px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "1rem",
+                        }}>
+                            <h3 style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", fontWeight: 700 }}>Social Media</h3>
+                            <p style={{ fontSize: "clamp(0.8rem, 1.6vw, 1rem)", lineHeight: 1.6 }}>
+                                Follow me on the following platforms.
+                            </p>
                             <a
                                 href="https://www.linkedin.com/in/aashisahu0302"
                                 target="_blank"
@@ -260,12 +276,9 @@ export default function Contact() {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     color: "#fff",
-                                    borderRadius: "50%",
-                                    width: "100px",
-                                    height: "100px",
                                     textDecoration: "none",
-                                    fontSize: "1.8rem",
-                                    paddingTop: "60px"
+                                    fontSize: "clamp(2rem, 5vw, 2.8rem)",
+                                    marginTop: "0.5rem",
                                 }}
                             >
                                 <FaLinkedin />
@@ -273,9 +286,17 @@ export default function Contact() {
                         </div>
 
                         {/* Section 3: Resume */}
-                        <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: "1rem" }}>
-                            <h3 style={{ fontSize: "1.5rem", fontWeight: 700 }}>Resume</h3>
-                            <p>Download my latest resume to see my experience and projects.</p>
+                        <div style={{
+                            flex: "1 1 200px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "1rem",
+                        }}>
+                            <h3 style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", fontWeight: 700 }}>Resume</h3>
+                            <p style={{ fontSize: "clamp(0.8rem, 1.6vw, 1rem)", lineHeight: 1.6 }}>
+                                Download my latest resume to see my experience and projects.
+                            </p>
                             <a
                                 href="https://drive.google.com/file/d/1UodRETGm1zq-oSZAi5p68C7qQJQfVdou/view?usp=sharing"
                                 target="_blank"
@@ -290,14 +311,13 @@ export default function Contact() {
                         </div>
                     </div>
                 </div>
-                <style>
-                    {`
+
+                <style>{`
                     @keyframes spin {
-                        0% { transform: rotate(0deg); }
+                        0%   { transform: rotate(0deg); }
                         100% { transform: rotate(360deg); }
                     }
-                `}
-                </style>
+                `}</style>
             </section>
         </div>
     );

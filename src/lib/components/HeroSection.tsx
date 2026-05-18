@@ -8,49 +8,49 @@ interface HeroSectionProps {
     contactRef: React.RefObject<HTMLDivElement>;
 }
 
-
 export default function HeroSection({ showGlassmorphic = true, contactRef }: HeroSectionProps) {
-    const [scale, setScale] = useState(1);
     const [section, setSection] = useState(0);
     const backgroundRef = useRef<HTMLDivElement>(null);
 
     const wrapperStyle: React.CSSProperties = {
-        position: "relative",
-        display: "inline-block",
-        padding: "3px",
-        borderRadius: "12px",
-        overflow: "hidden",
+        position: 'relative',
+        display: 'inline-block',
+        padding: '3px',
+        borderRadius: '12px',
+        overflow: 'hidden',
         cursor: 'pointer',
     };
 
     const borderLayerStyle: React.CSSProperties = {
-        position: "absolute",
+        position: 'absolute',
         inset: 0,
-        borderRadius: "12px",
-        background: "conic-gradient(yellow 0deg, transparent 90deg, transparent 270deg, yellow 360deg)",
-        animation: "spin 2s linear infinite",
-        WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-        WebkitMaskComposite: "xor",
-        maskComposite: "exclude",
-        padding: "3px",
-        boxSizing: "border-box",
+        borderRadius: '12px',
+        background:
+            'conic-gradient(yellow 0deg, transparent 90deg, transparent 270deg, yellow 360deg)',
+        animation: 'spin 2s linear infinite',
+        WebkitMask:
+            'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        WebkitMaskComposite: 'xor',
+        maskComposite: 'exclude',
+        padding: '3px',
+        boxSizing: 'border-box',
     };
 
     const innerStyle: React.CSSProperties = {
-        position: "relative",
-        background: "black",
-        color: "white",
-        borderRadius: "8px",
-        padding: "10px 32px",
+        position: 'relative',
+        background: 'black',
+        color: 'white',
+        borderRadius: '8px',
+        padding: 'clamp(8px, 1.5vw, 10px) clamp(16px, 4vw, 32px)',
+        fontSize: 'clamp(14px, 2vw, 16px)',
         zIndex: 1,
-        display: "inline-block",
+        display: 'inline-block',
     };
 
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
             const zoom = Math.max(0.5, 1 - scrollY / 1000);
-            setScale(zoom);
 
             if (backgroundRef.current) {
                 backgroundRef.current.style.transform = `translateX(-${scrollY}px) scale(${zoom})`;
@@ -68,24 +68,26 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
     const renderContent = () => (
         <>
             <h1
-                className="text-[10vw] font-extrabold text-transparent tracking-tight"
+                className="font-extrabold text-transparent tracking-tight"
                 style={{
-                    WebkitTextStroke: '2px white',
+                    fontSize: 'clamp(36px, 10vw, 120px)',
+                    WebkitTextStroke: 'clamp(1px, 0.3vw, 2px) white',
                     textShadow: '0 0 12px rgba(96, 165, 250, 0.6)',
                 }}
             >
                 AASHI SAHU.
             </h1>
 
-            <div>
+            <div className="mt-3 sm:mt-4">
                 {(() => {
                     switch (section) {
                         case 0:
                             return (
                                 <h2
-                                    className="text-[4vw] font-extrabold text-transparent tracking-tight mt-4"
+                                    className="font-extrabold text-transparent tracking-tight"
                                     style={{
-                                        WebkitTextStroke: '2px white',
+                                        fontSize: 'clamp(18px, 4.5vw, 56px)',
+                                        WebkitTextStroke: 'clamp(1px, 0.2vw, 2px) white',
                                         textShadow: '0 0 10px rgba(96, 165, 250, 0.6)',
                                     }}
                                 >
@@ -106,27 +108,31 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
                             );
                         case 1:
                             return (
-                                <div
-                                    style={wrapperStyle}
-                                    onClick={() => contactRef.current?.scrollIntoView({ behavior: "smooth" })}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") {
-                                            contactRef.current?.scrollIntoView({ behavior: "smooth" });
+                                <>
+                                    <div
+                                        style={wrapperStyle}
+                                        onClick={() =>
+                                            contactRef.current?.scrollIntoView({ behavior: 'smooth' })
                                         }
-                                    }}
-                                >
-                                    <div style={borderLayerStyle}></div>
-                                    <span style={innerStyle}>Contact me</span>
+                                        role="button"
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+                                            }
+                                        }}
+                                    >
+                                        <div style={borderLayerStyle} />
+                                        <span style={innerStyle}>Contact me</span>
 
-                                    <style>{`
-                    @keyframes spin {
-                      0% { transform: rotate(0deg); }
-                      100% { transform: rotate(360deg); }
-                    }
-                  `}</style>
-                                </div>
+                                        <style>{`
+                      @keyframes spin {
+                        0%   { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                      }
+                    `}</style>
+                                    </div>
+                                </>
                             );
                         default:
                             return null;
@@ -138,6 +144,7 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
 
     return (
         <div className="relative h-screen w-screen overflow-hidden text-white">
+            {/* Parallax video background */}
             <div
                 ref={backgroundRef}
                 className="fixed top-0 left-0 h-screen w-screen z-[-2] pointer-events-none transition-transform duration-200 ease-out"
@@ -151,19 +158,23 @@ export default function HeroSection({ showGlassmorphic = true, contactRef }: Her
                 />
             </div>
 
+            {/* Glassmorphic card */}
             {showGlassmorphic && (
                 <div className="fixed top-0 left-0 h-screen w-screen z-10 pointer-events-none">
-                    <div className="w-full h-screen flex items-center justify-center">
+                    <div className="w-full h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
                         <div
-                            className="shadow-2xl rounded-2xl w-[1200px] h-[500px] pointer-events-auto flex items-center justify-center"
+                            className="shadow-2xl rounded-2xl pointer-events-auto flex items-center justify-center w-full"
                             style={{
+                                maxWidth: 'min(1200px, 90vw)',
+                                minHeight: 'clamp(220px, 40vh, 500px)',
                                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
                                 backdropFilter: 'blur(20px)',
                                 WebkitBackdropFilter: 'blur(20px)',
                                 borderRadius: '1rem',
+                                padding: 'clamp(24px, 5vw, 48px) clamp(16px, 4vw, 48px)',
                             }}
                         >
-                            <div className="text-center">{renderContent()}</div>
+                            <div className="text-center w-full">{renderContent()}</div>
                         </div>
                     </div>
                 </div>
