@@ -19,14 +19,13 @@ export function FadeInLine({ children, index }: FadeInLineProps) {
             const windowHeight = window.innerHeight;
             const distance = elementTop - scrollTop;
 
-            // adjust this formula as needed
             let fade = 1 - distance / windowHeight;
             fade = Math.min(Math.max(fade, 0.3), 1);
             setOpacity(fade);
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // run once on mount
+        handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -37,6 +36,7 @@ export function FadeInLine({ children, index }: FadeInLineProps) {
             style={{
                 opacity,
                 transition: 'opacity 0.6s ease',
+                color: 'white',
             }}
             className="mb-6"
         >
